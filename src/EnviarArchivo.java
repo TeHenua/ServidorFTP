@@ -24,7 +24,8 @@ public class EnviarArchivo {
         // Creamos el flujo de salida, este tipo de flujo nos permite
         // hacer la escritura de diferentes tipos de datos tales como
         // Strings, boolean, caracteres y la familia de enteros,etc.
-        DataOutputStream dos = new DataOutputStream( socket.getOutputStream() );System.out.println( "Enviando Archivo: "+archivo.getName() );
+        DataOutputStream dos = new DataOutputStream( socket.getOutputStream() );
+        System.out.println( "Enviando Archivo: "+archivo.getName() );
         // Enviamos el nombre del archivo
         dos.writeUTF( archivo.getName() );
         // Enviamos el tamaÃ±o del archivo

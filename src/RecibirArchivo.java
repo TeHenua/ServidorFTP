@@ -27,7 +27,7 @@ public class RecibirArchivo {
                 System.out.println( "Recibiendo archivo "+nombreArchivo);
                 // Creamos flujo de salida, este flujo nos sirve para
                 // indicar donde guardaremos el archivo
-                FileOutputStream fos = new FileOutputStream("F:\\Copia//"+nombreArchivo);
+                FileOutputStream fos = new FileOutputStream("Archivos//"+nombreArchivo);
                 //Ruta donde se va a guardar el archivo
                 BufferedOutputStream out = new BufferedOutputStream(fos);
                 BufferedInputStream in = new BufferedInputStream( cliente.getInputStream() );
@@ -50,6 +50,11 @@ public class RecibirArchivo {
 
         }
     }
+
+    public void elegirModo(){
+
+    }
+
     // Lanzamos el servidor para la recepciÃ³n de archivos
     public static void main( String args[] ) throws IOException{
         new RecibirArchivo().iniciarServidor();
