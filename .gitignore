@@ -27,3 +27,7 @@ hs_err_pid*
 \.idea/modules\.xml
 
 \.idea/workspace\.xml
+
+\.idea/vcs\.xml
+
+ArchivosCliente/ejemplo\.txt
