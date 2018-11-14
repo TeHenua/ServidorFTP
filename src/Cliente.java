@@ -17,7 +17,7 @@ public class Cliente {
         socket.setSoTimeout( 2000 );
         socket.setKeepAlive( true );
         String opcion ="";
-        //while (!opcion.equalsIgnoreCase("c")){
+        while (!opcion.equalsIgnoreCase("c")){
             opcion = menu();
             enviarOpcion(opcion,socket);
             switch (opcion) {
@@ -34,7 +34,7 @@ public class Cliente {
                     socket.close();
                 }
             }
-        //}
+        }
 
     }
 
@@ -65,6 +65,7 @@ public class Cliente {
     public static void enviarOpcion(String opcion, Socket socket) throws IOException {
         DataOutputStream dos = new DataOutputStream( socket.getOutputStream());
         dos.writeUTF(opcion);
+        System.out.println("Opción enviada: "+opcion);
     }
 
     public static String seleccionarArchivo(Socket socket) throws IOException {

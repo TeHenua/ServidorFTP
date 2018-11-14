@@ -20,6 +20,7 @@ public class Recibir {
 
         byte[] buffer = new byte[ tam ];
         for( int i = 0; i < buffer.length; i++ ){
+            System.out.println("vuelta recibir "+i);
             buffer[i] = (byte)in.read();
         }
 

@@ -23,6 +23,7 @@ public class Enviar {
         byte[] buffer = new byte[tamanoArchivo];
         bis.read(buffer);
         for(int i = 0; i < buffer.length; i++){
+            System.out.println("vuelta enviar "+i);
             bos.write(buffer[i]);
         }
 
