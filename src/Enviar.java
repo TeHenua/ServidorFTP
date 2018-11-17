@@ -5,8 +5,7 @@ import java.util.ArrayList;
 public class Enviar {
 
 
-    public static void enviarArchivo(Socket socket,File archivo ) throws IOException {
-        DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
+    public static void enviarArchivo(DataOutputStream dos, BufferedOutputStream bos,File archivo ) throws IOException {
         System.out.println("Conectando...");
 
         String nombreArchivo = archivo.getName();
@@ -17,8 +16,7 @@ public class Enviar {
 
         FileInputStream fis = new FileInputStream(archivo);
         BufferedInputStream bis = new BufferedInputStream( fis );
-        BufferedOutputStream bos = new BufferedOutputStream( socket.getOutputStream());
-
+        
         System.out.println("Enviando archivo "+nombreArchivo);
         byte[] buffer = new byte[tamanoArchivo];
         bis.read(buffer);
@@ -29,11 +27,10 @@ public class Enviar {
 
         System.out.println("Archivo enviado.");
         bis.close();
-        bos.close();
+        
     }
 
-    public static void enviarListado(Socket socket, File carpeta) throws IOException {
-        DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
+    public static void enviarListado(DataOutputStream dos, File carpeta) throws IOException {
         System.out.println("Conectando...");
 
         dos.writeInt(carpeta.listFiles().length);

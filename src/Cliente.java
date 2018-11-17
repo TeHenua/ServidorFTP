@@ -10,16 +10,24 @@ public class Cliente {
     private static InetAddress direccion;
     private static int port = 21;
     private static String ruta = "ArchivosCliente//";
+    private static Socket socket;
+    private static DataOutputStream dos;
+    private static BufferedOutputStream bos;
+    private static DataInputStream dis; 
 
     public static void main(String args[]) throws IOException {
+
         direccion = InetAddress.getByName("localhost");
-        Socket socket = new Socket( direccion, port );
+        socket = new Socket( direccion, port );
         socket.setSoTimeout( 2000 );
         socket.setKeepAlive( true );
+        dos = new DataOutputStream( socket.getOutputStream());
+        bos = new BufferedOutputStream( socket.getOutputStream());
+        dis = new DataInputStream(socket.getInputStream());
         String opcion ="";
         while (!opcion.equalsIgnoreCase("c")){
             opcion = menu();
-            enviarOpcion(opcion,socket);
+            enviarOpcion(opcion);
             switch (opcion) {
                 case "a":{
                     enviarFichero(socket);
@@ -43,7 +51,8 @@ public class Cliente {
         String nombre = br.readLine()+".txt";
         File archivo = new File(ruta+nombre);
 
-        Enviar.enviarArchivo(socket,archivo);               //TODO validar si existe el fichero java.io.FileNotFoundException:
+        Enviar.enviarArchivo(dos,bos,archivo);               //TODO validar si existe el fichero java.io.FileNotFoundException:
+        bos.close();
     }
 
     public static String menu() throws IOException {
@@ -62,14 +71,14 @@ public class Cliente {
         return opcion;
     }
 
-    public static void enviarOpcion(String opcion, Socket socket) throws IOException {
-        DataOutputStream dos = new DataOutputStream( socket.getOutputStream());
+    public static void enviarOpcion(String opcion) throws IOException {
+        
         dos.writeUTF(opcion);
         System.out.println("Opción enviada: "+opcion);
     }
 
     public static String seleccionarArchivo(Socket socket) throws IOException {
-        ArrayList lista = Recibir.recibirListado(socket);
+        ArrayList lista = Recibir.recibirListado(dis);
         System.out.println("\nArchivos disponibles en el servidor:");
         for (int i = 0; i < lista.size(); i++) {
             System.out.println("- "+lista.get(i));

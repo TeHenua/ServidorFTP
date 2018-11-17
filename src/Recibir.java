@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class Recibir {
 
 
-    public static void recibirArchivo(Socket socket,String ruta) throws IOException {
-        DataInputStream dis = new DataInputStream( socket.getInputStream() );
+    public static void recibirArchivo(DataInputStream dis,BufferedInputStream in, String ruta) throws IOException {
+        
         System.out.println("Conectando...");
 
         String nombreArchivo = dis.readUTF().toString();
@@ -14,7 +14,7 @@ public class Recibir {
 
         FileOutputStream fos = new FileOutputStream(new File(ruta+nombreArchivo));
         BufferedOutputStream out = new BufferedOutputStream(fos);
-        BufferedInputStream in = new BufferedInputStream( socket.getInputStream() );
+        
 
         System.out.println("Recibiendo archivo "+nombreArchivo);
 
@@ -32,9 +32,9 @@ public class Recibir {
         out.close();
     }
 
-    public static ArrayList recibirListado(Socket socket) throws IOException {
+    public static ArrayList recibirListado(DataInputStream dis) throws IOException {
         ArrayList<String> lista = new ArrayList<>();
-        DataInputStream dis = new DataInputStream(socket.getInputStream());
+        
         System.out.println("Conectando...");
         int numero = dis.readInt();
         for (int i = 0; i < numero; i++) {
