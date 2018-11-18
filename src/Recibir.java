@@ -32,7 +32,7 @@ public class Recibir {
         out.close();
     }
 
-    public static ArrayList recibirListado(DataInputStream dis) throws IOException {
+    public static ArrayList<String> recibirListado(DataInputStream dis) throws IOException {
         ArrayList<String> lista = new ArrayList<>();
         
         System.out.println("Conectando...");
